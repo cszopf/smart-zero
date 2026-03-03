@@ -50,7 +50,7 @@ export function AppProvider({ children }: { children: React.ReactNode }) {
 
   // New state for Examiner Demo
   const [auditMode, setAuditMode] = useState(false);
-  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>([
+  const [auditLogs, setAuditLogs] = useState<AuditLogEntry[]>(() => [
     {
       id: 'LOG-001',
       orderId: 'ORD-2024-001',

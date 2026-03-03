@@ -353,4 +353,35 @@ export interface TransferHistoryVersion {
   notes: string;
 }
 
+export interface AuditLogEntry {
+  id: string;
+  orderId: string;
+  timestamp: string;
+  user: string;
+  role: string;
+  action: string;
+  details: string;
+  source: string;
+  aiRecommendation?: string;
+  humanDecision?: string;
+}
+
+export interface FraudSignal {
+  id: string;
+  orderId: string;
+  type: string;
+  severity: 'Low' | 'Medium' | 'High';
+  description: string;
+  detectedAt: string;
+  status: 'Active' | 'Resolved' | 'Dismissed';
+  recommendedAction: string;
+}
+
+export interface ProductivityMetric {
+  metric: string;
+  value: string | number;
+  trend: 'up' | 'down' | 'neutral';
+  trendValue: string;
+}
+
 export type UserRole = 'Abstractor' | 'Title Examiner' | 'Manager';
