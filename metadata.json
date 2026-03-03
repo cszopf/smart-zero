@@ -1,0 +1,5 @@
+{
+  "name": "Smart Zero",
+  "description": "The Zero Claims Title Infrastructure. A standalone verification engine that connects to the Smart database and publishes certified outputs into Smart Spaces.",
+  "requestFramePermissions": []
+}
