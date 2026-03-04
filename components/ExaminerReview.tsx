@@ -15,7 +15,8 @@ import {
   MessageSquare,
   FileText,
   Eye,
-  EyeOff
+  EyeOff,
+  Shield
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import TransferHistoryCard from './TransferHistoryCard';
@@ -25,6 +26,8 @@ import CommitmentPreview from './CommitmentPreview';
 import VestingValidationPanel from './VestingValidation';
 import PriorPolicyPanel from './PriorPolicyPanel';
 import PropertyEncumbrances from './PropertyEncumbrances';
+import AuditLog from './AuditLog';
+import GeminiFileSummary from './GeminiFileSummary';
 import { MOCK_DECISION_LOG } from '@/data/mock';
 
 export default function ExaminerReview() {
@@ -32,6 +35,7 @@ export default function ExaminerReview() {
   const [activeTab, setActiveTab] = useState<'queue' | 'review'>('queue');
   const [showTransferHistoryModal, setShowTransferHistoryModal] = useState(false);
   const [showCommitmentPreview, setShowCommitmentPreview] = useState(false);
+  const [regulatoryAuditMode, setRegulatoryAuditMode] = useState(false);
 
   const submittedOrders = orders.filter(o => o.status === 'Submitted For Examiner Review');
 
@@ -50,6 +54,18 @@ export default function ExaminerReview() {
             Back to Queue
           </button>
           <div className="flex items-center gap-4">
+            {/* Regulatory Audit Mode Toggle */}
+            <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
+              <Shield size={14} className={regulatoryAuditMode ? "text-indigo-600" : "text-slate-400"} />
+              <span className="text-xs font-bold text-slate-700">Audit Mode</span>
+              <button 
+                onClick={() => setRegulatoryAuditMode(!regulatoryAuditMode)}
+                className={`w-8 h-4 rounded-full transition-colors relative ${regulatoryAuditMode ? 'bg-indigo-600' : 'bg-slate-200'}`}
+              >
+                <div className={`absolute top-0.5 left-0.5 w-3 h-3 bg-white rounded-full transition-transform ${regulatoryAuditMode ? 'translate-x-4' : 'translate-x-0'}`} />
+              </button>
+            </div>
+
             {/* Commitment Preview Toggle */}
             <div className="flex items-center gap-2 bg-white px-3 py-1.5 rounded-lg border border-slate-200 shadow-sm">
               {showCommitmentPreview ? <Eye size={14} className="text-indigo-600" /> : <EyeOff size={14} className="text-slate-400" />}
@@ -82,6 +98,7 @@ export default function ExaminerReview() {
           </div>
         </div>
 
+        <GeminiFileSummary />
         <TransferHistoryCard onViewFullHistory={() => setShowTransferHistoryModal(true)} />
 
         {/* Section: Liens & Encumbrances (Mortgages, Judgments, Taxes) */}
@@ -95,7 +112,7 @@ export default function ExaminerReview() {
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
           <div className="lg:col-span-2 space-y-8">
-            <ExaminerCureCenter regulatoryAuditMode={false} />
+            <ExaminerCureCenter regulatoryAuditMode={regulatoryAuditMode} />
             
             <div className="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
               <h2 className="text-xl font-display font-bold text-slate-900 mb-6">Final Validated Facts</h2>
@@ -157,6 +174,15 @@ export default function ExaminerReview() {
                 )}
               </div>
             </div>
+
+            {regulatoryAuditMode && (
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+              >
+                <AuditLog />
+              </motion.div>
+            )}
           </div>
 
           <div className="space-y-8">

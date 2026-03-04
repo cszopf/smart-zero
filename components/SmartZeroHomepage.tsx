@@ -5,6 +5,7 @@ import { useAppContext } from '@/context/AppContext';
 import { UserRole } from '@/types';
 import { Search, Shield, BarChart3, CheckCircle2, FileText, Layers, Database, Lock } from 'lucide-react';
 import { motion } from 'motion/react';
+import Image from 'next/image';
 
 export default function SmartZeroHomepage() {
   const { setRole } = useAppContext();
@@ -18,9 +19,20 @@ export default function SmartZeroHomepage() {
       {/* Navigation / Header */}
       <header className="fixed top-0 w-full bg-slate-50/80 backdrop-blur-md z-50 border-b border-slate-200/50">
         <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-          <div>
-            <h1 className="text-xl font-bold tracking-tight text-slate-900">Smart Zero™</h1>
-            <p className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">Zero Claims. By Design.</p>
+          <div className="flex items-center gap-3">
+            <div className="relative w-8 h-8">
+              <Image 
+                src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfTteioSstds6PWnMZuidJMqRYMtVVQGyPt3EexpjhnP9HrRXZ0_3H72SZooXQ3bnlURpX09s5mvrO07fLxO3k7C_8D9mBTm5eXlBqed8jPhaekxSkeuJuBpxwV1BbU1hu3xeG0cYIZkvDvBP-qK4YpkvyOq-g?key=kl0MF71HcvaAWt9zvK_MLQ"
+                alt="Smart Zero Logo"
+                fill
+                className="object-contain"
+                referrerPolicy="no-referrer"
+              />
+            </div>
+            <div>
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 leading-tight">Smart Zero™</h1>
+              <p className="text-[10px] uppercase tracking-wider text-slate-500 font-medium">Zero Claims. By Design.</p>
+            </div>
           </div>
           <div className="hidden md:flex items-center gap-6 text-sm font-medium text-slate-600">
             <span className="cursor-pointer hover:text-slate-900 transition-colors">Platform</span>

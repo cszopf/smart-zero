@@ -16,19 +16,18 @@ export default function Header() {
         Current Role: {role}
       </div>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-        <div className="flex items-center gap-4">
-          <div className="relative w-40 h-10">
+        <div className="flex items-center gap-3">
+          <div className="relative w-8 h-8">
             <Image 
-              src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXe4r2r4ZaZwuHQDYDcjhSD0oGZH_bM1-x0mYk85YwxjpP73WbzYraj7Cu-jXAjIq54t2s5y6pOvf4_Sf3DPuBXrMo1WS6OropNs9_w2XNqZVgdb_3s8HR717Ob_Bpl6BPoy2zZ5D5hfrF01WMrY9y0d5xUWMg?key=kl0MF71HcvaAWt9zvK_MLQ"
-              alt="World Class Title"
+              src="https://lh7-rt.googleusercontent.com/docsz/AD_4nXfTteioSstds6PWnMZuidJMqRYMtVVQGyPt3EexpjhnP9HrRXZ0_3H72SZooXQ3bnlURpX09s5mvrO07fLxO3k7C_8D9mBTm5eXlBqed8jPhaekxSkeuJuBpxwV1BbU1hu3xeG0cYIZkvDvBP-qK4YpkvyOq-g?key=kl0MF71HcvaAWt9zvK_MLQ"
+              alt="Smart Zero Logo"
               fill
               className="object-contain"
               referrerPolicy="no-referrer"
             />
           </div>
-          <div className="h-6 w-px bg-slate-200 mx-2" />
           <span className="font-display font-bold text-lg tracking-tight text-slate-800">
-            Smart Abstractor Verify
+            Smart Zero™
           </span>
         </div>
 
