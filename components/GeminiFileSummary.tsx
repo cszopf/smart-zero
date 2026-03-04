@@ -22,19 +22,24 @@ export default function GeminiFileSummary() {
       const ai = new GoogleGenAI({ apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY! });
       const model = "gemini-3-flash-preview";
       
+      const address = 
+        currentOrder.property?.address ?? 
+        currentOrder.purchaseContract?.propertyAddress ?? 
+        "Address not provided";
+
       const prompt = `
         You are an expert title insurance assistant. 
         Summarize the following real estate title file in plain English for non-experts (like real estate agents, buyers, or sellers).
         
         Order Details:
         - Order ID: ${currentOrder.orderId}
-        - Address: ${currentOrder.propertyAddress}
-        - Buyer: ${currentOrder.purchaseContract?.buyerNames.join(', ')}
-        - Seller: ${currentOrder.purchaseContract?.sellerNames.join(', ')}
-        - Sales Price: $${currentOrder.purchaseContract?.salesPrice.toLocaleString()}
+        - Address: ${address}
+        - Buyer: ${currentOrder.purchaseContract?.buyerNames?.join(', ') ?? 'N/A'}
+        - Seller: ${currentOrder.purchaseContract?.sellerNames?.join(', ') ?? 'N/A'}
+        - Sales Price: ${currentOrder.purchaseContract?.salesPrice ? `$${currentOrder.purchaseContract.salesPrice.toLocaleString()}` : 'N/A'}
         
         Curative Items (Issues to resolve):
-        ${cureItems.filter(i => i.orderId === currentOrder.orderId).map(i => `- ${i.type}: ${i.description} (Status: ${i.status})`).join('\n')}
+        ${cureItems.filter(i => i.orderId === currentOrder.orderId).map(i => `- ${i.type}: ${i.title} (Status: ${i.status})`).join('\n')}
         
         Goal: Provide a clear, friendly, and professional status update. 
         Explain what is done, what is pending, and if there are any major "deal killers" (be reassuring if things are on track).
